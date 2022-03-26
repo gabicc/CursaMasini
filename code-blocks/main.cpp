@@ -8,6 +8,25 @@ using namespace std;
 #define VERDE 10
 #define ALB 7
 #define ROSU 12
+#define ALBASTRU_DESCHIS 11
+#define ALB_DESCHIS 15
+#define GALBEN 14
+#define MOV 13
+
+void tiparire_masini(int nr_masina[101], int vit_masina[101], int nr, ofstream& fout)
+{
+    for(int i=1; i<=nr; i++)
+            {
+                cout<<nr_masina[i]<<" "<<vit_masina[i]<<"km/h"<<endl;
+                fout<<nr_masina[i]<<" "<<vit_masina[i]<<"km/h"<<endl;
+            }
+}
+
+void schimba_culoare(int culoare)
+{
+    SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), culoare);
+}
+
 int main()
 {
     int al_patrulea=INT_MIN, al_treilea=INT_MIN, al_doilea=INT_MIN, masina2, masina3, masina4, n,v[101],a[101],maxx,ok;
@@ -28,32 +47,27 @@ int main()
     cout<<endl;
     do
     {
-        SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), VERDE);
+        schimba_culoare(VERDE);
         cout << "            MASINILE DE RALIU            \n";
-        Sleep(1500);
+        Sleep(800);
         cout<<endl;
-        SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), VERDE);
         cout << "Bine ati venit la RaceCarOrganizer! Cu ajutorul algoritmului veti putea organiza raliuri. \n\n";
         Sleep(3000);
-        SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), ALB);
+        schimba_culoare(ALB);
         cout << "1.Cea mai rapida masina din concurs.\n";
         Sleep(300);
-        SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), ALB);
         cout << "2.Cele mai rapide 3 masini.\n";
         Sleep(300);
-        SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), ALB);
         cout<<"3.Verifica daca masinile sunt plasate corect pe randuri (cele din randul din dreapta fiind pare).\n";
         Sleep(300);
-        SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), ALB);
         cout<<"4.Masinile in ordinea potrivita pentru raliu.\n";
         Sleep(300);
-        SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), ALB);
         cout<<"5.Masinile eliminate/accidentate din raliu.\n";
         Sleep(300);
         cout<<endl;
-        SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 11);
+        schimba_culoare (ALBASTRU_DESCHIS);
         cout << "0. EXIT.\n";
-        SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 15);
+        schimba_culoare (15);
         cin >> raspuns;
 
         system("CLS");
@@ -62,11 +76,8 @@ int main()
         case 1:
         {
             Sleep(300);
-            SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 7);
+            schimba_culoare (ALB);
             fout<<"Determinati cea mai rapida masina.\n"<<endl;
-
-
-
 
             maxx=0;
             int numar;
@@ -82,7 +93,7 @@ int main()
             cout<<endl;
 
 
-            SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 10);
+            schimba_culoare (VERDE);
             cout << "\n Pentru a va reintoarce la meniu, apasati orice tasta.";
             getch();
             system("CLS");
@@ -91,7 +102,7 @@ int main()
         case 2:
         {
 
-            SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 14);
+            schimba_culoare (GALBEN);
             fout<<"Determinati primele 3 cele mai rapide masini."<<endl;
 
             al_doilea=v[1];
@@ -132,7 +143,7 @@ int main()
                 <<"masina "<<masina4<<" cu "<<al_patrulea<<"km/h."<<endl;
             cout<<endl;
             Sleep(500);
-            SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 10);
+            schimba_culoare (VERDE);
             cout << "\n Pentru a va reintoarce la meniu, apasati orice tasta.";
             getch();
             system("CLS");
@@ -141,7 +152,7 @@ int main()
         case 3:
         {
             ok=1;
-            SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 13);
+            schimba_culoare (MOV);
             fout<<"Verificati daca masinile de pe pozitii impare au numar par de km/h"<<endl;
             int i=1;
             while(i<=n)
@@ -156,7 +167,7 @@ int main()
                 cout<<"Toate masinile de pe pozitii impare au numar par de km/h";
             cout<<endl;
             Sleep(500);
-            SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 10);
+            schimba_culoare (VERDE);
             cout << "\n Pentru a va reintoarce la meniu, apasati orice tasta.";
             getch();
             system("CLS");
@@ -165,7 +176,7 @@ int main()
         case 4:
         {
 
-            SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 14);
+            schimba_culoare (GALBEN);
             fout<<"Organizati masinile in ordinea potrivita pentru raliu."<<endl;
             int aux;
             for(int i=1; i<=n-1; i++)
@@ -183,14 +194,10 @@ int main()
             cout<<"Ordinea masinilor (de sus in jos) este: ";
             cout<<endl;
 
-            for(int i=1; i<=n; i++ )
-            {
-                cout<<a[i]<<" "<<v[i];
-                cout<<endl;
-            }
+            tiparire_masini(a, v, n, fout);
             cout<<"In ordinea aceasta cursa va fi destul de echilibrata"<<endl;
             Sleep(500);
-            SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 10);
+            schimba_culoare (VERDE);
             cout << "\n Pentru a va reintoarce la meniu, apasati orice tasta.";
             getch();
             system("CLS");
@@ -199,14 +206,10 @@ int main()
 
         case 5:
         {
-            SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 11);
+            schimba_culoare (ALBASTRU_DESCHIS);
             cout<<"Actuala lista de masini este "<<endl;
-            for(int i=1; i<=n; i++)
-            {
-                cout<<a[i]<<" "<<v[i]<<"km/h"<<endl;
-                fout<<a[i]<<" "<<v[i]<<"km/h"<<endl;
-            }
-            SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 14);
+            tiparire_masini(a, v, n, fout);
+            schimba_culoare (GALBEN);
             cout<<"Eliminati masinile intre pozitiile p si q din raliu."<<endl;
             fout<<"Eliminati masinile intre pozitiile p si q din raliu."<<endl;
             int p,q,i,diff;
@@ -221,14 +224,9 @@ int main()
                 v[i-diff]=v[i];
             }
             n=n-diff;
-            SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 10);
+            schimba_culoare (VERDE);
             cout<<"Noua ordine a masinilor, dupa eliminare, este: "<<endl;
-            for(int i=1; i<=n; i++)
-            {
-                cout<<a[i]<<" "<<v[i]<<"km/h"<<endl;
-                fout<<a[i]<<" "<<v[i]<<"km/h"<<endl;
-            }
-            SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 10);
+            tiparire_masini(a, v, n, fout);
             cout << "\n Pentru a va reintoarce la meniu, apasati orice tasta.";
             getch();
             system("CLS");
@@ -237,7 +235,7 @@ int main()
             break;
         default:
         {
-            SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), 12);
+            schimba_culoare (ROSU);
             cout<<"TASTA INCORRECTA. Pentru a va reintoarce la meniu, apasati orice tasta."<<endl;
             getch();
             system("CLS");
