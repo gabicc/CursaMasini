@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1648153670 source:c:\users\gabri\work with dad\probcursamasini\main.cpp
+	<fstream>
+	<bits/stdc++.h>
+	<windows.h>
+	<conio.h>
+	<stdlib.h>
+	<iostream>
+
